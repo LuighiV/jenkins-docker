@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+   jenkins:
+        container_name: jenkins-blueocean
+        restart: always
+        image: luighiv/jenkins-docker:latest
+        environment:
+            - 'DOCKER_HOST=tcp://172.17.0.1:2375'
+        ports:
+            - '8080:8080'
+            - '50000:50000'
+        volumes:
+            - jenkins-data:/var/jenkins_home
+            - jenkins-docker-certs:/certs/client:ro
+volumes:
+    jenkins-data:
+    jenkins-docker-certs:
