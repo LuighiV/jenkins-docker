@@ -1,7 +1,0 @@
-sudo docker exec -it jenkins-blueocean /bin/bash
-
-ssh-keygen -t rsa /var/jenkins_home/.ssh/terraform -C jenkins
-
-# Outside the docker container
-sudo docker cp jenkins-blueocean:/var/jenkins_home/.ssh/terraform.pub ./
-
