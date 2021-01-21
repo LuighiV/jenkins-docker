@@ -13,6 +13,13 @@ services:
             - jenkins-data:/var/jenkins_home
             - jenkins-docker-certs:/certs/client:ro
 
+   certbot:
+        image: "certbot/certbot"
+        volumes:
+            - ~/.nginx-certs/conf:/etc/letsencrypt
+            - ~/.nginx-certs/www:/var/www/certbot
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
    reverse:
         hostname: reverse
         image: "nginx:1.19.6-alpine"
@@ -22,11 +29,11 @@ services:
             - 443:443
         volumes:
             - ~/.nginx-config:/etc/nginx/conf.d
-#           - ~/.nginx-certs/conf:/etc/letsencrypt
-#           - ~/.nginx-certs/www:/var/www/certbot
+            - ~/.nginx-certs/conf:/etc/letsencrypt
+            - ~/.nginx-certs/www:/var/www/certbot
         restart: always
         depends_on:
-          #      - certbot
+            - certbot
             - jenkins
 volumes:
     jenkins-data:

@@ -1,13 +1,13 @@
 #!/bin/bash -x
 #Creating directories 
 
-#if [ -z "$1" ]
-#  then
-#    echo "No domain name supplied replaced by localhost"
-#    HOSTNAME=localhost
-#  else
-#    HOSTNAME=$1
-#fi
+if [ -z "$1" ]
+  then
+    echo "No domain name supplied replaced by localhost"
+    HOSTNAME=localhost
+  else
+    HOSTNAME=$1
+fi
 
 mkdir -p ~/.nginx-config && sudo chown 0:0 ~/.nginx-config
 
@@ -21,12 +21,12 @@ if [ !  -d "$nginx_certs" ];
     echo "Certificates folder is present. Skipping."
 fi
 
-#cp nginx-reverse/000-certbot.conf.txt nginx-reverse/000-certbot.conf
-#cp nginx-reverse/001-letsencrypt.conf.txt nginx-reverse/001-letsencrypt.conf
+cp nginx-reverse/000-certbot.conf.txt nginx-reverse/000-certbot.conf
+cp nginx-reverse/001-letsencrypt.conf.txt nginx-reverse/001-letsencrypt.conf
 
-#sed -i "s/localhost/$HOSTNAME/" nginx-reverse/000-certbot.conf
-#sed -i "s/example.org/$HOSTNAME/" nginx-reverse/001-letsencrypt.conf
+sed -i "s/localhost/$HOSTNAME/" nginx-reverse/000-certbot.conf
+sed -i "s/example.org/$HOSTNAME/" nginx-reverse/001-letsencrypt.conf
 
 sudo cp nginx-reverse/reverse.conf ~/.nginx-config/ 
-#sudo cp nginx-reverse/000-certbot.conf ~/.nginx-config/
-#sudo cp nginx-reverse/001-letsencrypt.conf ~/.nginx-config/
+sudo cp nginx-reverse/000-certbot.conf ~/.nginx-config/
+sudo cp nginx-reverse/001-letsencrypt.conf ~/.nginx-config/
