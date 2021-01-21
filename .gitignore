@@ -1,2 +1,4 @@
 initpass
 .generated/*
+nginx-reverse/000-certbot.conf
+nginx-reverse/001-letscript.conf
