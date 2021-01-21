@@ -29,7 +29,7 @@ email=$EMAIL_ADDRESS # Adding a valid address is strongly recommended
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 # For automatic test delete this verification
-if [ -d "$data_path/live/$domains" ]; then
+if [ -d "$data_path/conf/live/$domains" ]; then
     echo "Existing certificates. Skipping."
     exit
 fi
