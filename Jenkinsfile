@@ -11,7 +11,7 @@ pipeline {
 		}
             }
         }
-        stage('Build image') {
+        stage('Publishing image') {
             steps {
                 echo 'Pushing image'
 		script{
