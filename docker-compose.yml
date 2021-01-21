@@ -13,21 +13,21 @@ services:
             - jenkins-data:/var/jenkins_home
             - jenkins-docker-certs:/certs/client:ro
 
-  reverse:
-    hostname: reverse
-    image: "nginx:1.19.6-alpine"
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ~/.nginx-config:/etc/nginx/conf.d
-#      - ~/.nginx-certs/conf:/etc/letsencrypt
-#      - ~/.nginx-certs/www:/var/www/certbot
-    restart: always
-    depends_on:
-      #      - certbot
-      - jenkins
+   reverse:
+        hostname: reverse
+        image: "nginx:1.19.6-alpine"
+        command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - ~/.nginx-config:/etc/nginx/conf.d
+#           - ~/.nginx-certs/conf:/etc/letsencrypt
+#           - ~/.nginx-certs/www:/var/www/certbot
+        restart: always
+        depends_on:
+          #      - certbot
+            - jenkins
 volumes:
     jenkins-data:
     jenkins-docker-certs:
