@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+        registry = "luighiv/jenkins-docker"
+        registryCredential = 'dockerhub'
+	docker_image = ''
+    }
     agent { 
 	label 'master' 
     } 
@@ -7,7 +12,7 @@ pipeline {
             steps {
                 echo 'Building image'
 		script{
-  			def image = docker.build('jenkins-docker')
+  			docker_image = docker.build('$registry')
 		}
             }
         }
@@ -15,9 +20,9 @@ pipeline {
             steps {
                 echo 'Pushing image'
 		script{
-			docker.withRegistry('https://hub.docker.com/', 'docker-login') {
-  			     image.push('latest')
-			}
+			docker.withRegistry( '', registryCredential ) {
+  				docker_image.push('latest')
+     			}
 		}
             }
         }
