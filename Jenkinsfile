@@ -26,5 +26,11 @@ pipeline {
 		}
             }
         }
+	stage('Remove unused docker image') {
+            steps{
+ 		echo 'Deleting unused image'
+                sh "docker rmi $registry:latest"
+            }
+        }
     }
 }
