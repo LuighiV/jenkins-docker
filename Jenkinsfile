@@ -6,9 +6,19 @@ pipeline {
         stage('Build image') {
             steps {
                 echo 'Building image'
-		docker.withRegistry('https://hub.docker.com/', 'docker-login') {
-  			docker.build('jenkins-docker').push('latest')
-		}  
+		script{
+  			def image = docker.build('jenkins-docker')
+		}
+            }
+        }
+        stage('Build image') {
+            steps {
+                echo 'Pushing image'
+		script{
+			docker.withRegistry('https://hub.docker.com/', 'docker-login') {
+  			     image.push('latest')
+			}
+		}
             }
         }
     }
