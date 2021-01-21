@@ -1,7 +1,7 @@
 pipeline {
     environment {
         registry = "luighiv/jenkins-docker"
-        registryCredential = 'dockerhub'
+        registryCredential = 'docker-login'
 	docker_image = ''
     }
     agent { 
